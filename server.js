@@ -1,16 +1,23 @@
-var mysql = require("mysql");
-var connection;
+var express = require("express");
+var bodyParser = require("body-parser");
 
-if (process.env.JAWSDB_URL) {
-    connection = mysql.createConnection(process.env.JAWSDB_URL);
-} else {
-    connection = mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        password: "Assyla!011609",
-        database: "burger_db"
-    });
-};
+var PORT = process.env.PORT || 8080;
 
-connection.connect();
-module.exports = connection;
+var app = express();
+
+app.use(express.static("public"));
+
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+
+var exphbs = require("express-handlebars");
+app.engine("handlebars", exphbs({defaultLayout: "main"}));
+app.set("view engine", "handlebars");
+
+var routes = require("./controllers/burgers_controller.js");
+
+app.use(routes); //or app.use("/", routes);
+
+app.listen(PORT, function(){
+    console.log("App listening on http:localhost:" + PORT);
+})
