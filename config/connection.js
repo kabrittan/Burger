@@ -12,5 +12,12 @@ if (process.env.JAWSDB_URL) {
     });
 };
 
-connection.connect();
+connection.connect(function(err) {
+    if (err) {
+        console.log("Error connecting to the dB: " + err.stack);
+        return;
+    }
+    console.log("Connected to dB as " + connection.threadId);
+});
+
 module.exports = connection;
