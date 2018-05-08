@@ -1,28 +1,28 @@
 var connection = require("./connection.js");
 
 var orm = {
-    selectAll: function(tableInput, cb) {
+    selectAll: function(table, cb) {
         var queryString = "SELECT * FROM ??";
-        connection.query(queryString, [tableInput], function(err, result){
+        connection.query(queryString, [table], function(err, data){
             if (err) throw err;
-            console.log(result);
-            cb(result);
+            console.log(data);
+            cb(data);
         });
     },
-    insertOne: function(table, column, value, cb) {
-        var queryString = "INSERT INTO ?? VALUES ?? = ?";
-        connection.query(queryString, [table, column, value], function(err, result){
+    insertOne: function(table, cols, vals, cb) {
+        var queryString = "INSERT INTO ?? (??) VALUES (?)";
+        connection.query(queryString, [table, cols, vals], function(err, data){
             if (err) throw err;
-            console.log(result);
-            cb(result);
+            console.log(data);
+            cb(data);
         });
     },
-    updateOne: function(table, objColVal, newValue, cb) {
-        var queryString = "UPDATE ?? SET ? WHERE ?";
-        connection.query(queryString, [table, objColVal, newValue], function(err, result){
+    updateOne: function(table, changeColumn, newValue, idColumn, id, cb) {
+        var queryString = "UPDATE ?? SET ?? = ? WHERE ?? = ?";
+        connection.query(queryString, [table, changeColumn, newValue, idColumn, id], function(err, data){
             if (err) throw err;
-            console.log(result);
-            cb(result);
+            console.log(data);
+            cb(data);
         });
     }
 };

@@ -1,6 +1,5 @@
-$(function () {
-
-    $(".add-burger").on("submit", function (event) {
+$(function() {
+    $(".add-burger").on("submit", function(event) {
         event.preventDefault();
         var newBurger = {
         burger_name: $("#newBurger").val().trim()
@@ -10,15 +9,13 @@ $(function () {
         $.ajax("/api/burgers", {
             type: "POST",
             data: newBurger
-        }).then(function () {
+        }).then(function() {
             console.log("Added new burger: " + newBurger);
         });
         location.reload();
     });
-
-
-    //eat a burger
-    $(".devoured").click(function (event) {
+    
+    $(".devoured").click(function(event) {
         event.preventDefault();
         var id = $(this).data("id");
         console.log("devoured button " + id + " clicked");
@@ -29,8 +26,8 @@ $(function () {
         $.ajax("/api/burgers/" + id, {
             type: "PUT",
             data: eaten
-        }).then(function () {
-            console.log("Hope you enjoyed the burger");
+        }).then(function() {
+            console.log("How was the burger?");
             location.reload();
         });
     });
