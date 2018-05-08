@@ -1,0 +1,24 @@
+<h1>Burger Time!</h1>
+
+<h2>Ready to Go:</h2>
+  <ul class="notEatenList">
+      {{#each burgers}} {{#unless devoured}}
+        <li class="notEaten">
+          {{id}}. {{burger_name}}
+          <button type="submit" data-id={{id}} class="devoured">Devoured</button>
+        </li>
+      {{/unless}} {{/each}}
+  </ul>
+
+<h2>Sorry - Out of Stock:</h2>
+  <ul class="eatenList">
+      {{#each burgers}} {{#if devoured}}
+      <li class="eaten">{{id}}. {{burger_name}}</li>
+      {{/if}} {{/each}}
+  </ul>
+
+<h2>Create Your Own::</h2>
+  <form class="add-burger">
+      <input type="text" id="newBurger" name="newBurger">
+      <button type="submit" id="submitBurger">Submit</button>
+  </form>
